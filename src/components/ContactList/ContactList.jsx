@@ -1,19 +1,17 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ContactItem from 'components/ContactItem/ContactItem';
 import { Header, List, Section, Title } from './ContactList.styled';
-import { getContacts, getFilter } from '../../redux/selectors';
-
-const getFilteredContacts = (contacts, filter) => {
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
-};
+import { selectVisibleContacts } from '../../redux/selectors';
+import { getContacts } from '../../redux/contactsSlice';
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
-  const filteredContacts = getFilteredContacts(contacts, filter);
+  const contacts = useSelector(selectVisibleContacts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContacts());
+  }, [dispatch]);
 
   return (
     <Section>
@@ -26,10 +24,10 @@ const ContactList = () => {
 
       <hr style={{ margin: '20px 0' }}></hr>
 
-      <Title>Contacts ({filteredContacts.length})</Title>
-      {filteredContacts.length > 0 ? (
+      <Title>Contacts ({contacts.length})</Title>
+      {contacts.length > 0 ? (
         <List>
-          {filteredContacts.map(contact => (
+          {contacts.map(contact => (
             <ContactItem key={contact.id} {...contact} />
           ))}
         </List>

@@ -32,7 +32,7 @@ const ContactItem = ({ id, name, number, color, bgColor }) => {
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   bgColor: PropTypes.string.isRequired,
 };

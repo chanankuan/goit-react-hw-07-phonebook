@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IMaskInput } from 'react-imask';
 import { Form, FormInput, FormSubmit, Format } from './ContactForm.styled';
 import { addContact } from '../../redux/contactsSlice';
-import { getContacts } from '../../redux/selectors';
+import { selectContacts } from '../../redux/selectors';
 
 const NumberMask = forwardRef(function TextMaskCustom(props, ref) {
   const { onChange, ...other } = props;
@@ -23,7 +23,7 @@ const NumberMask = forwardRef(function TextMaskCustom(props, ref) {
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', number: '' });
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleChange = event => {
