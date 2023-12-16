@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import ContactItem from 'components/ContactItem/ContactItem';
 import { Header, List, Section, Title } from './ContactList.styled';
 import { selectVisibleContacts } from '../../redux/selectors';
-import { getContacts } from '../../redux/contactsSlice';
+import { fetchContacts } from '../../redux/contactsSlice';
 
 const ContactList = () => {
   const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getContacts());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (

@@ -2,7 +2,7 @@ import { forwardRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IMaskInput } from 'react-imask';
 import { Form, FormInput, FormSubmit, Format } from './ContactForm.styled';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact, updateState } from '../../redux/contactsSlice';
 import { selectContacts } from '../../redux/selectors';
 
 const NumberMask = forwardRef(function TextMaskCustom(props, ref) {
@@ -36,7 +36,7 @@ const ContactForm = () => {
     setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleAddContact = event => {
+  const handleAddContact = async event => {
     event.preventDefault();
 
     const isExist = contacts.some(contact => {

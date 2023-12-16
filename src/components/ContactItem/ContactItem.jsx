@@ -12,7 +12,7 @@ import {
   Number,
 } from './ContactItem.styled';
 
-const ContactItem = ({ id, name, number, color, bgColor }) => {
+const ContactItem = ({ id, name, phone, color, bgColor }) => {
   const dispatch = useDispatch();
 
   return (
@@ -21,7 +21,7 @@ const ContactItem = ({ id, name, number, color, bgColor }) => {
         <Character>{name[0].toUpperCase()}</Character>
       </Avatar>
       <Name>{name}</Name>
-      <Number>{number}</Number>
+      <Number>{phone}</Number>
       <DeleteButton onClick={() => dispatch(deleteContact(id))}>
         <DeleteIcon />
       </DeleteButton>

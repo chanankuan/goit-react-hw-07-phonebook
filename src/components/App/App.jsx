@@ -5,14 +5,14 @@ import { Container, Wrapper, Title } from './App.styled';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import { selectVisibleContacts } from '../../redux/selectors';
-import { getContacts } from '../../redux/contactsSlice';
+import { fetchContacts } from '../../redux/contactsSlice';
 
 const App = () => {
   const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getContacts());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
