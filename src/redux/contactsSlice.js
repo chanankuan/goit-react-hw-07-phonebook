@@ -51,7 +51,8 @@ export const deleteContact = createAsyncThunk(
 );
 
 const handleRejected = (state, { payload }) => {
-  state.isLoading = false;
+  state.fetchInProgress = false;
+  state.postInProgress = false;
   state.error = payload;
 };
 
