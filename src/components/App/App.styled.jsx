@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { RotatingLines } from 'react-loader-spinner';
 
 export const StyledLoader = styled.div`
   position: fixed;
