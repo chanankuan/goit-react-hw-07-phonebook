@@ -50,10 +50,6 @@ export const deleteContact = createAsyncThunk(
   }
 );
 
-const handlePending = state => {
-  state.isLoading = true;
-};
-
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
@@ -64,21 +60,27 @@ export const contactsSlice = createSlice({
   initialState: initialState.contacts,
   extraReducers: builder => {
     builder
-      .addCase(fetchContacts.pending, handlePending)
+      .addCase(fetchContacts.pending, state => {
+        state.fetchInProgress = true;
+      })
       .addCase(fetchContacts.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+        state.fetchInProgress = false;
         state.items = payload;
       })
       .addCase(fetchContacts.rejected, handleRejected)
-      .addCase(addContact.pending, handlePending)
+      .addCase(addContact.pending, state => {
+        state.postInProgress = true;
+      })
       .addCase(addContact.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+        state.postInProgress = false;
         state.items = state.items.concat(payload);
       })
       .addCase(addContact.rejected, handleRejected)
-      .addCase(deleteContact.pending, handlePending)
+      .addCase(deleteContact.pending, state => {
+        state.deleteInProgress = true;
+      })
       .addCase(deleteContact.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+        state.deleteInProgress = false;
         state.items = state.items.filter(({ id }) => id !== payload.id);
       })
       .addCase(deleteContact.rejected, handleRejected);

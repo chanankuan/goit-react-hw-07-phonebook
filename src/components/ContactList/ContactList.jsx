@@ -4,6 +4,7 @@ import ContactItem from 'components/ContactItem/ContactItem';
 import { Header, List, Section, Title } from './ContactList.styled';
 import { selectVisibleContacts } from '../../redux/selectors';
 import { fetchContacts } from '../../redux/contactsSlice';
+import Filter from 'components/Filter/Filter';
 
 const ContactList = () => {
   const contacts = useSelector(selectVisibleContacts);
@@ -14,27 +15,31 @@ const ContactList = () => {
   }, [dispatch]);
 
   return (
-    <Section>
-      <Header>
-        <p>Name</p>
-        <p></p>
-        <p>Phone Number</p>
-        <p></p>
-      </Header>
+    contacts.length > 0 && (
+      <Section>
+        <Filter />
 
-      <hr style={{ margin: '20px 0' }}></hr>
+        <Header>
+          <p>Name</p>
+          <p></p>
+          <p>Phone Number</p>
+          <p></p>
+        </Header>
 
-      <Title>Contacts ({contacts.length})</Title>
-      {contacts.length > 0 ? (
-        <List>
-          {contacts.map(contact => (
-            <ContactItem key={contact.id} {...contact} />
-          ))}
-        </List>
-      ) : (
-        <h2>Contacts not found</h2>
-      )}
-    </Section>
+        <hr style={{ margin: '20px 0' }}></hr>
+
+        <Title>Contacts ({contacts.length})</Title>
+        {contacts.length > 0 ? (
+          <List>
+            {contacts.map(contact => (
+              <ContactItem key={contact.id} {...contact} />
+            ))}
+          </List>
+        ) : (
+          <h2>Contacts not found</h2>
+        )}
+      </Section>
+    )
   );
 };
 

@@ -1,7 +1,9 @@
 export const initialState = {
   contacts: {
     items: [],
-    isLoading: false,
+    fetchInProgress: false,
+    postInProgress: false,
+    deleteInProgress: false,
     error: null,
   },
   filter: '',

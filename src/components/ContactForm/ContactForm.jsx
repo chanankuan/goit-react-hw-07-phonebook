@@ -2,8 +2,9 @@ import { forwardRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IMaskInput } from 'react-imask';
 import { Form, FormInput, FormSubmit, Format } from './ContactForm.styled';
-import { addContact, updateState } from '../../redux/contactsSlice';
-import { selectContacts } from '../../redux/selectors';
+import { addContact } from '../../redux/contactsSlice';
+import { selectContacts, selectIsPostInProgress } from '../../redux/selectors';
+import Loader from 'components/Loader/Loader';
 
 const NumberMask = forwardRef(function TextMaskCustom(props, ref) {
   const { onChange, ...other } = props;
@@ -23,8 +24,9 @@ const NumberMask = forwardRef(function TextMaskCustom(props, ref) {
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', number: '' });
-  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsPostInProgress);
 
   const handleChange = event => {
     let { name, value } = event.target;
@@ -81,7 +83,7 @@ const ContactForm = () => {
       />
       <Format>Format: (012) 345-67-89</Format>
       <FormSubmit variant="contained" type="submit">
-        Add contact
+        {isLoading && formData ? <Loader width={30} /> : 'Add contact'}
       </FormSubmit>
     </Form>
   );

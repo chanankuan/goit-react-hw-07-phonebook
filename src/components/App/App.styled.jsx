@@ -1,4 +1,12 @@
 import styled from '@emotion/styled';
+import { RotatingLines } from 'react-loader-spinner';
+
+export const StyledLoader = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 export const Container = styled.div`
   max-width: 500px;

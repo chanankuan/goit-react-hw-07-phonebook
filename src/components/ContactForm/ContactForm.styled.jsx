@@ -17,9 +17,11 @@ export const FormInput = styled(TextField)(() => ({
 }));
 
 export const FormSubmit = styled(Button)(() => ({
+  position: 'relative',
   margin: '0 auto',
   marginTop: '40px',
   width: '300px',
+  height: '40px',
   backgroundColor: theme.palette.primary.light,
   '&:hover': {
     backgroundColor: theme.palette.primary.main,

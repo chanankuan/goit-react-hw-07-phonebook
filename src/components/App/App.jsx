@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Filter } from 'components/Filter/Filter';
-import { Container, Wrapper, Title } from './App.styled';
+import { useSelector } from 'react-redux';
+import { Container, Wrapper, Title, StyledLoader } from './App.styled';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
-import { selectVisibleContacts } from '../../redux/selectors';
-import { fetchContacts } from '../../redux/contactsSlice';
+import { selectIsFetchInProgress } from '../../redux/selectors';
+import Loader from 'components/Loader/Loader';
 
 const App = () => {
-  const contacts = useSelector(selectVisibleContacts);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+  const isLoading = useSelector(selectIsFetchInProgress);
 
   return (
     <Container>
@@ -21,12 +14,13 @@ const App = () => {
       <Wrapper>
         <ContactForm />
 
-        {contacts.length > 0 && (
-          <>
-            <Filter />
-            <ContactList />
-          </>
+        {isLoading && (
+          <StyledLoader>
+            <Loader width={60} />
+          </StyledLoader>
         )}
+
+        <ContactList />
       </Wrapper>
     </Container>
   );

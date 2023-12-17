@@ -23,7 +23,7 @@ const ContactItem = ({ id, name, phone, color, bgColor }) => {
       <Name>{name}</Name>
       <Number>{phone}</Number>
       <DeleteButton onClick={() => dispatch(deleteContact(id))}>
-        <DeleteIcon />
+        {<DeleteIcon />}
       </DeleteButton>
     </Item>
   );
