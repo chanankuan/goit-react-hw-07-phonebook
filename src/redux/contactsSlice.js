@@ -25,8 +25,7 @@ export const addContact = createAsyncThunk(
         method: 'post',
         url: '/contacts',
         data: {
-          name: userData.name,
-          phone: userData.number,
+          ...userData,
           bgColor: getRandomHexColor().bgColor,
           color: getRandomHexColor().color,
         },

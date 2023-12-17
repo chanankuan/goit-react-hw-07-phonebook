@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContactItem from 'components/ContactItem/ContactItem';
-import { Header, List, Section, Title } from './ContactList.styled';
-import { selectVisibleContacts } from '../../redux/selectors';
-import { fetchContacts } from '../../redux/contactsSlice';
 import Filter from 'components/Filter/Filter';
+import { Header, List, Section, Title } from './ContactList.styled';
+import { selectContacts, selectVisibleContacts } from '../../redux/selectors';
+import { fetchContacts } from '../../redux/contactsSlice';
 
 const ContactList = () => {
-  const contacts = useSelector(selectVisibleContacts);
+  const contacts = useSelector(selectContacts);
+  const filteredContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,10 +29,10 @@ const ContactList = () => {
 
         <hr style={{ margin: '20px 0' }}></hr>
 
-        <Title>Contacts ({contacts.length})</Title>
-        {contacts.length > 0 ? (
+        <Title>Contacts ({filteredContacts.length})</Title>
+        {filteredContacts.length > 0 ? (
           <List>
-            {contacts.map(contact => (
+            {filteredContacts.map(contact => (
               <ContactItem key={contact.id} {...contact} />
             ))}
           </List>
